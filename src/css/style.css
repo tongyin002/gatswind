@@ -1,5 +1,28 @@
 /*! purgecss start ignore */
 @tailwind base;
+
+body {
+  font-family: "cardo";
+}
+
+h1,
+h2,
+h3 {
+  @apply font-helvetica;
+}
+
 @tailwind components;
 /*! purgecss end ignore */
 @tailwind utilities;
+
+.hyphens-auto {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+.hyphens-none {
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}

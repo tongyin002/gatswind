@@ -2,8 +2,9 @@ import { useStaticQuery, graphql } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
 import { Helmet } from "react-helmet";
+import "typeface-cardo";
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO({ description, lang, meta, keywords, title, classProp }) {
   const { site } = useStaticQuery(graphql`
     query DefaultSEOQuery {
       site {
@@ -17,6 +18,10 @@ function SEO({ description, lang, meta, keywords, title }) {
   `);
 
   const metaDescription = description || site.siteMetadata.description;
+  let classNames = "leading-1p7em antialiased align-baseline";
+  if (classProp) {
+    classNames = `${classProp} ${classProp}`;
+  }
 
   return (
     <Helmet
@@ -68,6 +73,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         .concat(meta)}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
+      bodyAttributes={{ class: classNames }}
     />
   );
 }
@@ -84,6 +90,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.array,
   title: PropTypes.string.isRequired,
+  classProp: PropTypes.string,
 };
 
 export default SEO;
