@@ -7,6 +7,7 @@ module.exports = {
         lightBlack: "#1a1a1a",
         lightWhite: "#9c9c9c",
         textDark: "#222",
+        lightGray: "#dedede",
       },
       spacing: {
         px2: "2px",
@@ -33,6 +34,7 @@ module.exports = {
         px1150: "1150px",
         "3/50": "6%",
         "2/25": "8%",
+        "4/5": "80%",
         "21/25": "84%",
       },
       width: {},
@@ -42,6 +44,7 @@ module.exports = {
         "1p25em": "1.25em",
         "1p4em": "1.4em",
         "1p5em": "1.5em",
+        "1p6em": "1.6em",
         "1p7em": "1.7em",
         "1p8em": "1.8em",
         "1p9em": "1.9em",

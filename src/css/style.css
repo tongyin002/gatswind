@@ -17,10 +17,11 @@ h3 {
 /*! purgecss end ignore */
 @tailwind utilities;
 
-.hyphens-auto {
-  hyphens: auto;
-}
-
-.hyphens-none {
-  hyphens: none;
+@responsive {
+  .hyphens-auto {
+    hyphens: auto;
+  }
+  .hyphens-none {
+    hyphens: none;
+  }
 }
