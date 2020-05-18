@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         lightBlack: "#1a1a1a",
         lightWhite: "#9c9c9c",
+        textDark: "#222",
       },
       spacing: {
         px2: "2px",
@@ -27,6 +28,7 @@ module.exports = {
         px150: "150px",
         px100: "100px",
         px200: "200px",
+        px650: "650px",
         px760: "760px",
         px1150: "1150px",
         "3/50": "6%",
@@ -37,6 +39,7 @@ module.exports = {
       height: {},
       lineHeight: {
         "1em": "1em",
+        "1p25em": "1.25em",
         "1p4em": "1.4em",
         "1p5em": "1.5em",
         "1p7em": "1.7em",
@@ -59,12 +62,15 @@ module.exports = {
         p85r: "0.85rem",
         "1r": "1rem",
         "1p2r": "1.2rem",
+        "1p5r": "1.5rem",
         "4p5r": "4.5rem",
         "5p75r": "5.75rem",
       },
       margin: {},
       maxWidth: {
         px300: "300px",
+        px550: "550px",
+        px650: "650px",
         px1150: "1150px",
         px1500: "1500px",
         px1580: "1580px",
@@ -76,6 +82,7 @@ module.exports = {
       minHeight: {},
       letterSpacing: {
         npx6: "-6px",
+        npx1: "-1px",
       },
       fontWeight: {},
       flexShrink: {

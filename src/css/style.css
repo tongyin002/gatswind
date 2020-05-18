@@ -2,7 +2,9 @@
 @tailwind base;
 
 body {
+  @apply text-textDark;
   font-family: "cardo";
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -16,13 +18,9 @@ h3 {
 @tailwind utilities;
 
 .hyphens-auto {
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
   hyphens: auto;
 }
 
 .hyphens-none {
-  -webkit-hyphens: none;
-  -ms-hyphens: none;
   hyphens: none;
 }
