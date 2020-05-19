@@ -43,7 +43,20 @@ module.exports = {
         path: `${__dirname}/src/contents/`,
       },
     },
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              icon: false,
+              elements: [`h2`, `h3`],
+            },
+          },
+        ],
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,

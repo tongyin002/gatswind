@@ -63,7 +63,9 @@ module.exports = {
         p7r: "0.7rem",
         p8r: "0.8rem",
         p85r: "0.85rem",
+        p96r: "0.95rem",
         "1r": "1rem",
+        "1p1r": "1.1rem",
         "1p2r": "1.2rem",
         "1p5r": "1.5rem",
         "4p5r": "4.5rem",
@@ -74,6 +76,8 @@ module.exports = {
         px300: "300px",
         px550: "550px",
         px650: "650px",
+        px680: "680px",
+        px1000: "1000px",
         px1150: "1150px",
         px1500: "1500px",
         px1580: "1580px",
@@ -86,6 +90,7 @@ module.exports = {
       letterSpacing: {
         npx6: "-6px",
         npx1: "-1px",
+        npxp5: "-0.5px",
       },
       fontWeight: {},
       flexShrink: {
