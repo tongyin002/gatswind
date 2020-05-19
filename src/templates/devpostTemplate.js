@@ -40,7 +40,10 @@ const createToc = (items, depth) => {
 /* eslint-disable react/display-name */
 const components = {
   p: (props) => (
-    <p {...props} className="my-px20 text-1r leading-1p7em hyphens-auto" />
+    <p
+      {...props}
+      className="my-px20 text-1r leading-1p7em hyphens-auto md:text-1p04r md:leading-1p75em"
+    />
   ),
   h2: (props) => (
     <h2
@@ -59,7 +62,7 @@ const components = {
   li: (props) => (
     <li
       {...props}
-      className="ml-px40 pl-px5 mb-px10 text-1r leading-1p7em"
+      className="ml-px40 pl-px5 mb-px10 text-1r leading-1p7em md:text-1p04r md:leading-1p75em"
     ></li>
   ),
   strong: (props) => (
@@ -83,7 +86,7 @@ export default function DevPostTemplate({ data: { mdx } }) {
             fluid={childImageSharp.fluid}
             alt={name}
             caption={caption}
-            className="my-px40"
+            className="my-px40 lg:relative lg:w-px650"
             classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em"
           />
         ) : (
@@ -91,8 +94,8 @@ export default function DevPostTemplate({ data: { mdx } }) {
             src={publicURL}
             alt={name}
             caption={caption}
-            className="my-px40"
-            classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em"
+            className="my-px40 lg:relative lg:w-px650"
+            classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0"
           />
         );
     });
@@ -101,15 +104,15 @@ export default function DevPostTemplate({ data: { mdx } }) {
   return (
     <LayoutWhite>
       <SEO title="Dev-Post" description="tyin dev-post" />
-      <section className="mx-2/25 flex-1">
+      <section className="mx-2/25 flex-1 md:m-px50">
         <div className="max-w-px1000">
-          <h1 className="mt-px20 mb-px40 pb-px40 text-4p5r leading-1em tracking-npx6 hyphens-auto text-black border-b-8 border-black">
+          <h1 className="mt-px20 mb-px40 pb-px40 text-4p5r leading-1em tracking-npx6 hyphens-auto text-black border-b-8 border-black md:mb-px50 md:pb-px50 md:border-b-10 md:text-5p75r md:hyphens-none lg:mb-px50 lg:pb-px50">
             {title}
           </h1>
         </div>
         <div className="max-w-px680">
           {mdx.tableOfContents.items ? (
-            <>
+            <div className="md:float-right md:ml-px30 md:w-px200">
               <div className="text-p65r font-helvetica leading-1p5em">
                 <h2 className="my-px10 text-p7r tracking-npxp5 text-black font-bold uppercase">
                   Contents
@@ -117,12 +120,14 @@ export default function DevPostTemplate({ data: { mdx } }) {
                 {createToc(mdx.tableOfContents.items, 0)}
               </div>
               <div className="w-4/5 my-px30 mx-auto border-b border-lightGray" />
-            </>
+            </div>
           ) : (
             <></>
           )}
           <MDXProvider components={components}>
-            <MDXRenderer imgs={imgs}>{mdx.body}</MDXRenderer>
+            <div className="md:max-w-px550 lg:overflow-visible">
+              <MDXRenderer imgs={imgs}>{mdx.body}</MDXRenderer>
+            </div>
           </MDXProvider>
         </div>
       </section>

@@ -17,6 +17,7 @@
     "gatsby-remark-autolink-headers": "^2.3.2",
     "gatsby-source-filesystem": "^2.3.5",
     "gatsby-transformer-sharp": "^2.5.2",
+    "prism-react-renderer": "^1.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

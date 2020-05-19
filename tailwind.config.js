@@ -8,6 +8,7 @@ module.exports = {
         lightWhite: "#9c9c9c",
         textDark: "#222",
         lightGray: "#dedede",
+        codeBg: "#f6f6f6",
       },
       spacing: {
         px2: "2px",
@@ -46,6 +47,7 @@ module.exports = {
         "1p5em": "1.5em",
         "1p6em": "1.6em",
         "1p7em": "1.7em",
+        "1p75em": "1.75em",
         "1p8em": "1.8em",
         "1p9em": "1.9em",
       },
@@ -65,6 +67,7 @@ module.exports = {
         p85r: "0.85rem",
         p96r: "0.95rem",
         "1r": "1rem",
+        "1p04r": "1.04rem",
         "1p1r": "1.1rem",
         "1p2r": "1.2rem",
         "1p5r": "1.5rem",
@@ -98,11 +101,14 @@ module.exports = {
       },
       inset: {
         px50: "50px",
+        npx120: "-120px",
       },
       listStyleType: {
         loalpha: "lower-alpha",
       },
-      borderRadius: {},
+      borderWidth: {
+        "10": "10px",
+      },
     },
   },
   variants: {},
