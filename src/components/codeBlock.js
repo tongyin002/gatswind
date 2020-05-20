@@ -10,7 +10,7 @@ export default function CodeBlock({ children, classNamePre, classNameDiv }) {
     <Highlight
       {...defaultProps}
       theme={theme}
-      code={children.props.children}
+      code={children.props.children.trim()}
       language={
         matches && matches.groups && matches.groups.lang
           ? matches.groups.lang

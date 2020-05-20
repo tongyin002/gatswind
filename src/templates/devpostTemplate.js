@@ -8,6 +8,7 @@ import SEO from "../components/seo";
 import LayoutWhite from "../components/LayoutWriting";
 import { ImageSharp, ImageSrc } from "../components/figure";
 import CodeBlock from "../components/codeBlock";
+import WritingInfoCard from "../components/writingInfoCard";
 
 const createToc = (items, depth) => {
   if (items) {
@@ -80,21 +81,59 @@ const components = {
   pre: (props) => (
     <CodeBlock
       {...props}
-      classNamePre="bg-codeBg font-monoca text-p75r leading-1p4em p-px25 overflow-auto lg:w-px650"
-      classNameDiv="p-p5em"
+      classNamePre="bg-codeBg font-monoca text-p75r leading-1p4em p-px25 lg:w-px650"
+      classNameDiv="p-p5em overflow-auto"
     ></CodeBlock>
   ),
+  // eslint-disable-next-line react/prop-types
+  wrapper: ({ children }) => {
+    // updatedChildren becomes our new list of children, including any modifications
+    // eslint-disable-next-line react/prop-types
+    const updatedChildren = children.map((child, index) => {
+      if (child.props.className === "footnotes") {
+        // Since we only have one element that will ever match this
+        // the key doesn't matter, but react will yell without a key.
+        return (
+          <div key={index} className="footnotes my-px30 mx-auto w-9/10">
+            {child.props.children[0]}
+            <ol className="list-decimal">
+              {child.props.children[1].props.children.length > 1 ? (
+                child.props.children[1].props.children.map((item, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="text-p8r leading-1p6em my-px20 md:text-p85r"
+                    >
+                      {item.props.children}
+                    </li>
+                  );
+                })
+              ) : (
+                <li className="text-p8r leading-1p6em my-px20 md:text-p85r">
+                  {child.props.children[1].props.children.props.children}
+                </li>
+              )}
+            </ol>
+          </div>
+        );
+      }
+      return child;
+    });
+    return <>{updatedChildren}</>;
+  },
 };
 /* eslint-enable react/display-name */
 
 export default function DevPostTemplate({ data: { mdx } }) {
-  const { title, images } = mdx.frontmatter;
+  const { title, images, PR } = mdx.frontmatter;
 
   const imgs = {};
   if (images) {
     images.forEach((image, index) => {
       const { childImageSharp, publicURL, name } = image;
-
+      const className = "my-px40 lg:relative lg:w-px650";
+      const classNameCaption =
+        "pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0";
       // eslint-disable-next-line react/display-name, react/prop-types
       imgs[`Img${index + 1}`] = ({ caption }) =>
         childImageSharp ? (
@@ -102,23 +141,33 @@ export default function DevPostTemplate({ data: { mdx } }) {
             fluid={childImageSharp.fluid}
             alt={name}
             caption={caption}
-            className="my-px40 lg:relative lg:w-px650"
-            classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0"
+            className={className}
+            classNameCaption={classNameCaption}
           />
         ) : (
           <ImageSrc
             src={publicURL}
             alt={name}
             caption={caption}
-            className="my-px40 lg:relative lg:w-px650"
-            classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0"
+            className={className}
+            classNameCaption={classNameCaption}
           />
         );
     });
   }
 
+  const infoCard = (
+    <>
+      <div className="hidden md:block w-4/5 my-px25 mx-auto border-b border-lightGray" />
+      <WritingInfoCard
+        {...mdx.frontmatter}
+        className="hidden md:block md:text-right md:text-p65r md:leading-1p4em md:mr-px10"
+      ></WritingInfoCard>
+    </>
+  );
+
   return (
-    <LayoutWhite>
+    <LayoutWhite writingInfo={infoCard}>
       <SEO title="Dev-Post" description="tyin dev-post" />
       <section className="mx-2/25 flex-1 md:m-px50">
         <div className="max-w-px1000">
@@ -143,8 +192,20 @@ export default function DevPostTemplate({ data: { mdx } }) {
           <MDXProvider components={components}>
             <div className="md:max-w-px550 lg:overflow-visible">
               <MDXRenderer imgs={imgs}>{mdx.body}</MDXRenderer>
+              <div className="w-4/5 my-px25 mx-auto border-b border-lightGray" />
             </div>
           </MDXProvider>
+          <WritingInfoCard
+            {...mdx.frontmatter}
+            className="leading-1p6em italic text-left md:hidden"
+          ></WritingInfoCard>
+          <p className="italic text-p8r leading-1p6em md:text-p85r">
+            Did I make a mistake? Please consider{" "}
+            <a href={PR} className="border-b border-black hover:border-white">
+              sending a pull request
+            </a>
+            .
+          </p>
         </div>
       </section>
     </LayoutWhite>
@@ -165,6 +226,7 @@ export const pageQuery = graphql`
         title
         published_at(formatString: "MMMM DD YYYY")
         location
+        PR
         images {
           name
           publicURL
