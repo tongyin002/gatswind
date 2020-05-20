@@ -138,10 +138,10 @@ export default function FragmentTemplate({ data: { mdx } }) {
 
   const infoCard = (
     <>
-      <div className="hidden md:block w-4/5 my-px25 mx-auto border-b border-lightGray" />
+      <div className="hidden md:block md:w-4/5 md:my-px25 md:mx-auto md:border-b md:border-lightGray" />
       <WritingInfoCard
         {...mdx.frontmatter}
-        className="hidden md:block md:text-right md:text-p65r md:leading-1p4em md:mr-px10"
+        className="hidden md:block md:text-right md:text-p65r md:leading-1p4em md:mr-px5"
       ></WritingInfoCard>
     </>
   );
