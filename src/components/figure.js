@@ -36,4 +36,21 @@ ImageSrc.propTypes = {
   classNameCaption: PropTypes.string,
 };
 
-export { ImageSharp, ImageSrc };
+const VideoSrc = ({ src, caption, className, classNameCaption }) => {
+  return (
+    <figure className={className}>
+      <video controls>
+        <source src={src} type="video/mp4" />
+      </video>
+      <figcaption className={classNameCaption}>{caption}</figcaption>
+    </figure>
+  );
+};
+
+VideoSrc.propTypes = {
+  src: PropTypes.string.isRequired,
+  caption: PropTypes.string,
+  className: PropTypes.string,
+  classNameCaption: PropTypes.string,
+};
+export { ImageSharp, ImageSrc, VideoSrc };

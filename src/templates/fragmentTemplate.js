@@ -6,37 +6,11 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import SEO from "../components/seo";
 import LayoutWhite from "../components/LayoutWriting";
-import { ImageSharp, ImageSrc, VideoSrc } from "../components/figure";
+import { ImageSharp, ImageSrc } from "../components/figure";
 import CodeBlock from "../components/codeBlock";
 import WritingInfoCard from "../components/writingInfoCard";
 
-const createToc = (items, depth) => {
-  if (items) {
-    return (
-      <ol
-        className={`my-px5 ${depth % 2 == 0 ? "list-decimal" : "list-loalpha"}`}
-      >
-        {items.map((item) => {
-          return (
-            <li key={item.title} className="my-px8 ml-px16 pl-px10">
-              <a
-                href={item.url}
-                className={`border-b ${
-                  depth % 2 == 0 ? "border-black" : ""
-                } hover:border-white`}
-              >
-                {item.title}
-              </a>
-              {createToc(item.items, depth + 1)}
-            </li>
-          );
-        })}
-      </ol>
-    );
-  } else {
-    return;
-  }
-};
+import styles from "../css/fragment.module.css";
 
 /* eslint-disable react/display-name */
 const components = {
@@ -49,7 +23,7 @@ const components = {
   h2: (props) => (
     <h2
       {...props}
-      className="mt-px30 -mb-px10 text-1p5r tracking-npx1 font-helvetica hyphens-auto text-black"
+      className="mt-px35 -mb-px15 text-p9r tracking-npx1 font-bold font-helvetica hyphens-auto text-black"
     ></h2>
   ),
   h3: (props) => (
@@ -81,9 +55,15 @@ const components = {
   pre: (props) => (
     <CodeBlock
       {...props}
-      classNamePre="bg-codeBg font-monoca text-p75r leading-1p4em p-px25 lg:w-px650"
+      classNamePre="bg-codeBg font-monoca text-p75r leading-1p4em p-px25 lg:max-w-px650"
       classNameDiv="p-p5em overflow-auto"
     ></CodeBlock>
+  ),
+  blockquote: (props) => (
+    <blockquote
+      {...props}
+      className="py-px1 pl-px15 ml-px15 border-l-10 border-quoteBorder text-quote italic font-helvetica leading-1p7em text-p95r"
+    ></blockquote>
   ),
   // eslint-disable-next-line react/prop-types
   wrapper: ({ children }) => {
@@ -124,8 +104,8 @@ const components = {
 };
 /* eslint-enable react/display-name */
 
-export default function DevPostTemplate({ data: { mdx } }) {
-  const { title, images, PR, videos } = mdx.frontmatter;
+export default function FragmentTemplate({ data: { mdx } }) {
+  const { title, images, PR } = mdx.frontmatter;
 
   const imgs = {};
   if (images) {
@@ -156,25 +136,6 @@ export default function DevPostTemplate({ data: { mdx } }) {
     });
   }
 
-  const vids = {};
-  if (videos) {
-    videos.forEach((video, index) => {
-      const { publicURL } = video;
-      const className = "my-px40 lg:relative lg:w-px650";
-      const classNameCaption =
-        "pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0";
-      // eslint-disable-next-line react/display-name, react/prop-types
-      vids[`Vid${index + 1}`] = ({ caption }) => (
-        <VideoSrc
-          src={publicURL}
-          caption={caption}
-          className={className}
-          classNameCaption={classNameCaption}
-        ></VideoSrc>
-      );
-    });
-  }
-
   const infoCard = (
     <>
       <div className="hidden md:block w-4/5 my-px25 mx-auto border-b border-lightGray" />
@@ -188,29 +149,24 @@ export default function DevPostTemplate({ data: { mdx } }) {
   return (
     <LayoutWhite writingInfo={infoCard}>
       <SEO title="Dev-Post" description="tyin dev-post" />
-      <section className="mx-2/25 flex-1 md:m-px50">
+      <section className="mx-2/25 flex-1 pt-px10 md:m-px50">
         <div className="max-w-px1000">
-          <h1 className="mt-px20 mb-px40 pb-px40 text-4p5r leading-1em tracking-npx6 hyphens-auto text-black border-b-8 border-black md:mb-px50 md:pb-px50 md:border-b-10 md:text-5p75r md:hyphens-none lg:mb-px50 lg:pb-px50">
-            {title}
-          </h1>
+          <div className="max-w-px700 md:mb-px50">
+            <div className="mt-px30 mb-px40 font-helvetica text-p65r font-bold leading-1p4em uppercase">
+              <a href="/fragments">Fragments</a>
+            </div>
+            <h1 className="mb-px40 mt-px20 -ml-px2 text-3r tracking-npx4 leading-1em hyphens-auto md:mb-px30 md:text-4r">
+              {title}
+            </h1>
+          </div>
+          <div
+            className={`${styles.fragmentsHeaderSeparator} h-px5 mb-px40 md:mb-px50 md:h-px6`}
+          ></div>
         </div>
         <div className="max-w-px680">
-          {mdx.tableOfContents.items ? (
-            <div className="md:float-right md:ml-px30 md:w-px200">
-              <div className="text-p65r font-helvetica leading-1p5em">
-                <h2 className="my-px10 text-p7r tracking-npxp5 text-black font-bold uppercase">
-                  Contents
-                </h2>
-                {createToc(mdx.tableOfContents.items, 0)}
-              </div>
-              <div className="w-4/5 my-px30 mx-auto border-b border-lightGray" />
-            </div>
-          ) : (
-            <></>
-          )}
           <MDXProvider components={components}>
             <div className="md:max-w-px550 lg:overflow-visible">
-              <MDXRenderer imgs={imgs} vids={vids}>{mdx.body}</MDXRenderer>
+              <MDXRenderer imgs={imgs}>{mdx.body}</MDXRenderer>
               <div className="w-4/5 my-px25 mx-auto border-b border-lightGray" />
             </div>
           </MDXProvider>
@@ -231,12 +187,12 @@ export default function DevPostTemplate({ data: { mdx } }) {
   );
 }
 
-DevPostTemplate.propTypes = {
+FragmentTemplate.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
 export const pageQuery = graphql`
-  query BlogPostQuery($id: String) {
+  query FragmentQuery($id: String) {
     mdx(id: { eq: $id }) {
       id
       body
@@ -254,9 +210,6 @@ export const pageQuery = graphql`
               ...GatsbyImageSharpFluid_withWebp
             }
           }
-        }
-        videos {
-          publicURL
         }
       }
     }

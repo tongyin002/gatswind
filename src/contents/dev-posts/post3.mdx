@@ -3,6 +3,8 @@ hook: "A walkthrough of the design of a live reload feature for the static site 
 location: "San Francisco"
 published_at: 2019-05-28T13:57:17Z
 title: "Building a Robust Live Reloader with WebSockets and Go"
+videos:
+  - ./images/post3/live-reload.h264.mp4
 ---
 
 For the last couple weeks I've been making a few upgrades
@@ -21,17 +23,10 @@ generator's development mode and a build is triggered, live
 reloading signals any web browsers open to the site to
 reload their content. Here's a video of it in action:
 
-<figure class="relative">
-  <p>
-    <video controls class="overflowing">
-      <source src="./images/post3/live-reload.h264.mp4" type="video/mp4" />
-    </video>
-  </p>
-  <figcaption class="gatsby-resp-image-figcaption">
-    A short video of the live reload feature in action: changes saved in the
-    editor show up immediately in the browser.
-  </figcaption>
-</figure>
+<props.vids.Vid1
+  caption="A short video of the live reload feature in action: changes saved in the
+    editor show up immediately in the browser."
+/>
 
 It's hard to be convinced just reading about it -- it
 doesn't seem like a big deal to just ⌘-`Tab` over to the

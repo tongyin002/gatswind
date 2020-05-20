@@ -42,6 +42,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             id
             fields {
               slug
+              type
             }
           }
         }
@@ -58,12 +59,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // you'll call `createPage` for each result
   posts.forEach(({ node }) => {
+    const type = node.fields.type;
     createPage({
       // This is the slug you created before
       // (or `node.frontmatter.slug`)
       path: node.fields.slug,
       // This component will wrap our MDX content
-      component: path.resolve(`./src/templates/devpostTemplate.js`),
+      component: path.resolve(
+        `${
+          type == "fragments"
+            ? "./src/templates/fragmentTemplate.js"
+            : "./src/templates/devpostTemplate.js"
+        }`
+      ),
       // You can use the values in this context in
       // our page layout component
       context: { id: node.id },

@@ -1,0 +1,14 @@
+.fragmentsHeaderSeparator {
+  @apply ml-0 max-w-px700;
+  background: linear-gradient(
+    135deg,
+    transparent 25%,
+    #222 25%,
+    #222 50%,
+    transparent 50%,
+    transparent 75%,
+    #222 75%,
+    #222 100%
+  );
+  background-size: 7px 7px;
+}
