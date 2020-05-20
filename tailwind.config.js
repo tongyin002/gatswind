@@ -49,6 +49,7 @@ module.exports = {
       height: {},
       lineHeight: {
         "1em": "1em",
+        "1p2em": "1.2em",
         "1p25em": "1.25em",
         "1p4em": "1.4em",
         "1p5em": "1.5em",

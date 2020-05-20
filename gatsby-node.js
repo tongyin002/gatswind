@@ -27,6 +27,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value: type,
     });
+
+    createNodeField({
+      name: "year",
+      node,
+      value: node.frontmatter.published_at.slice(0, 4),
+    });
   }
 };
 

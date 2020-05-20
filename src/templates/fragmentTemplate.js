@@ -142,6 +142,7 @@ export default function FragmentTemplate({ data: { mdx } }) {
       <WritingInfoCard
         {...mdx.frontmatter}
         className="hidden md:block md:text-right md:text-p65r md:leading-1p4em md:mr-px5"
+        {...mdx.fields}
       ></WritingInfoCard>
     </>
   );
@@ -173,6 +174,7 @@ export default function FragmentTemplate({ data: { mdx } }) {
           <WritingInfoCard
             {...mdx.frontmatter}
             className="leading-1p6em italic text-left md:hidden"
+            {...mdx.fields}
           ></WritingInfoCard>
           <p className="italic text-p8r leading-1p6em md:text-p85r">
             Did I make a mistake? Please consider{" "}
@@ -197,6 +199,9 @@ export const pageQuery = graphql`
       id
       body
       tableOfContents
+      fields {
+        type
+      }
       frontmatter {
         title
         published_at(formatString: "MMMM DD YYYY")

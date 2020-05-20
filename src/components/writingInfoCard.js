@@ -6,12 +6,13 @@ export default function WritingInfoCard({
   published_at,
   location,
   className,
+  type,
 }) {
   return (
     <div className={className}>
       <p className="my-px20 text-p8r leading-1p6em md:my-px10 md:text-p65r md:leading-1p4em">
         <strong className="font-helvetica not-italic text-p75r font-bold md:text-p65r">
-          Dev-Post
+          {type == "fragments" ? "Fragment" : "Dev-Post"}
         </strong>
         <br />
         {title}
@@ -39,4 +40,5 @@ WritingInfoCard.propTypes = {
   published_at: PropTypes.string,
   location: PropTypes.string,
   className: PropTypes.string,
+  type: PropTypes.string,
 };
