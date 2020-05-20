@@ -3,11 +3,11 @@ import { graphql } from "gatsby";
 import PropTypes from "prop-types";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-//import Img from "gatsby-image";
 
 import SEO from "../components/seo";
 import LayoutWhite from "../components/LayoutWriting";
 import { ImageSharp, ImageSrc } from "../components/figure";
+import CodeBlock from "../components/codeBlock";
 
 const createToc = (items, depth) => {
   if (items) {
@@ -68,6 +68,22 @@ const components = {
   strong: (props) => (
     <strong {...props} className="font-helvetica text-p95r font-bold"></strong>
   ),
+  a: (props) => (
+    <a {...props} className="border-b border-black hover:border-white"></a>
+  ),
+  inlineCode: (props) => (
+    <code
+      {...props}
+      className="bg-codeBg text-p8r py-px2 px-px4 font-monoca"
+    ></code>
+  ),
+  pre: (props) => (
+    <CodeBlock
+      {...props}
+      classNamePre="bg-codeBg font-monoca text-p75r leading-1p4em p-px25 overflow-auto lg:w-px650"
+      classNameDiv="p-p5em"
+    ></CodeBlock>
+  ),
 };
 /* eslint-enable react/display-name */
 
@@ -87,7 +103,7 @@ export default function DevPostTemplate({ data: { mdx } }) {
             alt={name}
             caption={caption}
             className="my-px40 lg:relative lg:w-px650"
-            classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em"
+            classNameCaption="pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0"
           />
         ) : (
           <ImageSrc
