@@ -1,10 +1,11 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import PropTypes from "prop-types";
-import Img from "gatsby-image";
 
 import SEO from "../components/seo";
 import LayoutWhite from "../components/LayoutWriting";
+
+import styles from "../css/fragment.module.css";
 
 const creatYearList = (groups) => {
   return (
@@ -24,58 +25,45 @@ const creatYearList = (groups) => {
     </div>
   );
 };
-export default function PostsPage({ data }) {
+export default function FragmentsPage({ data }) {
   const groups = data.allMdx.group;
 
   return (
     <LayoutWhite yearList={creatYearList(groups)}>
-      <SEO title="Dev-Posts" description="tyin posts" />
-      <section className="mx-2/25 flex-1 md:m-px50">
-        <div className="md:max-w-px550">
-          <h1 className="mt-px20 mb-px30 text-4p5r tracking-npx6 leading-1em font-helvetica hyphens-auto text-black md:text-5p75r">
-            Dev-Posts
+      <SEO title="Fragments" description="tyin fragments" />
+      <section className="mx-2/25 pt-px10 flex-1 md:m-px50">
+        <div className="max-w-px700">
+          <h1 className="mt-px20 mb-px50 font-helvetica text-3r tracking-npx4 leading-1em hyphens-auto md:text-4r">
+            Fragments
           </h1>
-          <div className="text-p9r">
+          <div
+            className={`${styles.fragmentsHeaderSeparator} h-px5 mb-px40 md:mb-px50 md:h-px6`}
+          ></div>
+          <div className="text-p85r leading-1p6em">
             {groups.map((group) => {
               const year = group.fieldValue;
               return (
                 <div key={year}>
                   <h2
                     id={year}
-                    className="mt-px30 -mb-px10 text-1p5r font-helvetica tracking-npx1"
+                    className="mt-px35 -mb-px15 text-p9r font-helvetica tracking-npx1 font-bold"
                   >
                     {year}
                   </h2>
                   <ul className="my-px20">
                     {group.nodes.map((node, index) => {
-                      const {
-                        title,
-                        hook,
-                        published_at,
-                        hook_image,
-                      } = node.frontmatter;
+                      const { title, published_at } = node.frontmatter;
                       const { slug } = node.fields;
                       return (
-                        <li key={index} className="mb-px25">
-                          {hook_image ? (
-                            <Img
-                              fixed={hook_image.childImageSharp.fixed}
-                              className="rounded-lg mr-px15 mb-px10 float-left"
-                            />
-                          ) : (
-                            <></>
-                          )}
+                        <li key={index} className="mb-px9">
                           <div className="leading-1p2em font-helvetica">
-                            <Link to={slug} className="font-bold text-p95r">
+                            <Link to={slug} className="border-b border-black hover:border-white">
                               {title}
                             </Link>
                             <span className="italic text-lightWhite text-p75r ml-px5">
                               {published_at}
                             </span>
                           </div>
-                          <p className="mt-px5 text-p9r leading-1p7em">
-                            {hook}
-                          </p>
                         </li>
                       );
                     })}
@@ -90,29 +78,21 @@ export default function PostsPage({ data }) {
   );
 }
 
-PostsPage.propTypes = {
+FragmentsPage.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
 export const query = graphql`
-  query GetDevPosts {
+  query GetFragments {
     allMdx(
-      filter: { fields: { type: { eq: "dev-posts" } } }
+      filter: { fields: { type: { eq: "fragments" } } }
       sort: { fields: frontmatter___published_at, order: DESC }
     ) {
       group(field: fields___year) {
         nodes {
           frontmatter {
-            hook
             published_at(formatString: "MMMM DD YYYY")
             title
-            hook_image {
-              childImageSharp {
-                fixed(webpQuality: 100, quality: 100, width: 65, height: 65) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
           }
           fields {
             slug

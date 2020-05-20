@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import PropTypes from "prop-types";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
@@ -154,7 +154,7 @@ export default function FragmentTemplate({ data: { mdx } }) {
         <div className="max-w-px1000">
           <div className="max-w-px700 md:mb-px50">
             <div className="mt-px30 mb-px40 font-helvetica text-p65r font-bold leading-1p4em uppercase">
-              <a href="/fragments">Fragments</a>
+              <Link to="/fragments">Fragments</Link>
             </div>
             <h1 className="mb-px40 mt-px20 -ml-px2 text-3r tracking-npx4 leading-1em hyphens-auto md:mb-px30 md:text-4r">
               {title}

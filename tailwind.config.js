@@ -45,8 +45,6 @@ module.exports = {
         "21/25": "84%",
         "9/10": "90%",
       },
-      width: {},
-      height: {},
       lineHeight: {
         "1em": "1em",
         "1p2em": "1.2em",
@@ -116,7 +114,6 @@ module.exports = {
         npx1: "-1px",
         npxp5: "-0.5px",
       },
-      fontWeight: {},
       flexShrink: {
         "3": 3,
       },
