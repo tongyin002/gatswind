@@ -42,6 +42,7 @@ export default function AboutPage({ data }) {
             I mainly document development and problm solving process in{" "}
             <Link
               to="/dev-posts"
+              title="dev-posts"
               className=" border-b border-black hover:border-white"
             >
               DEV-POSTS
@@ -49,6 +50,7 @@ export default function AboutPage({ data }) {
             . Where in{" "}
             <Link
               to="/fragments"
+              title="fragments"
               className=" border-b border-black hover:border-white"
             >
               FRAGMENTS

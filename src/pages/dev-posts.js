@@ -66,7 +66,11 @@ export default function PostsPage({ data }) {
                             <></>
                           )}
                           <div className="leading-1p2em font-helvetica">
-                            <Link to={slug} className="font-bold text-p95r">
+                            <Link
+                              to={slug}
+                              title={title}
+                              className="font-bold text-p95r"
+                            >
                               {title}
                             </Link>
                             <span className="italic text-lightWhite text-p75r ml-px5">

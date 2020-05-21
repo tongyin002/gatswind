@@ -57,7 +57,11 @@ export default function FragmentsPage({ data }) {
                       return (
                         <li key={index} className="mb-px9">
                           <div className="leading-1p2em font-helvetica">
-                            <Link to={slug} className="border-b border-black hover:border-white">
+                            <Link
+                              to={slug}
+                              title={title}
+                              className="border-b border-black hover:border-white"
+                            >
                               {title}
                             </Link>
                             <span className="italic text-lightWhite text-p75r ml-px5">

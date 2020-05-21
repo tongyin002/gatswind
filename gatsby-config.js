@@ -60,5 +60,21 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://master.d1lr2zsvdkc5fx.amplifyapp.com/",
+        sitemap: "https://master.d1lr2zsvdkc5fx.amplifyapp.com/sitemap.xml",
+        resolveEnv: () => process.env.GATSBY_ENV,
+        env: {
+          development: {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
+          },
+          production: {
+            policy: [{ userAgent: "*", allow: "/" }],
+          },
+        },
+      },
+    },
   ],
 };

@@ -22,6 +22,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/about"
+                    title="about"
                     className="border-b border-black hover:border-white"
                   >
                     About
@@ -30,6 +31,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/"
+                    title="home"
                     className="border-b border-black hover:border-white"
                   >
                     Home
@@ -38,6 +40,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/now"
+                    title="now"
                     className="border-b border-black hover:border-white"
                   >
                     Now
@@ -46,6 +49,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/sitemap"
+                    title="sitemap"
                     className="border-b border-black hover:border-white"
                   >
                     Sitemap
@@ -61,6 +65,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/dev-posts"
+                    title="dev-posts"
                     className="border-b border-black hover:border-white"
                   >
                     Dev-Posts
@@ -69,6 +74,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/fragments"
+                    title="fragments"
                     className="border-b border-black hover:border-white"
                   >
                     Fragments
@@ -84,6 +90,7 @@ export default function NowPage() {
                 <li className="mb-px3">
                   <Link
                     to="/photos"
+                    title="photos"
                     className="border-b border-black hover:border-white"
                   >
                     Photography
