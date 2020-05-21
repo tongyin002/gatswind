@@ -15,13 +15,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-tailwind`,
-        short_name: `starter`,
+        name: `tyin site`,
+        short_name: `tyin`,
         start_url: `/`,
         background_color: fullConfig.theme.colors.white,
         theme_color: fullConfig.theme.colors.teal["400"],
         display: `minimal-ui`,
-        icon: `src/images/icon.png`,
+        icon: `src/contents/metaInfo/icon.png`,
       },
     },
     {
@@ -51,7 +51,7 @@ module.exports = {
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               icon: false,
-              elements: [`h2`, `h3`],
+              elements: [`h2`, `h3`, `h4`],
             },
           },
         ],
