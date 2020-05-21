@@ -20,7 +20,7 @@ function SEO({ description, lang, meta, keywords, title, classProp }) {
   const metaDescription = description || site.siteMetadata.description;
   let classNames = "leading-1p7em antialiased align-baseline";
   if (classProp) {
-    classNames = `${classProp} ${classProp}`;
+    classNames = `${classProp} ${classNames}`;
   }
 
   return (
