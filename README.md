@@ -18,7 +18,7 @@ Develop locally:
 npm run develop
 ```
 
-Generate production build and test it loccaly:
+Generate production build and test it locally:
 ```bash
 npm run build
 npm run serve
