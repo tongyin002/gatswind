@@ -93,7 +93,7 @@ export default function NowPage() {
                     title="photos"
                     className="border-b border-black hover:border-white"
                   >
-                    Photography
+                    Photos
                   </Link>
                 </li>
               </ul>

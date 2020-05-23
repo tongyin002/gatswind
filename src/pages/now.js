@@ -21,22 +21,17 @@ export default function NowPage({ data }) {
               <Img fluid={data.file.childImageSharp.fluid} alt="about"></Img>
             </div>
             <p className="my-px20">
-              You only recognize this place if and only if you have been there
-              (disclaimer: it&apos;s on Oahu, Hwaii). The cost of reaching to
-              the top from the back of the moutain with no stairs on a muddy
-              raining day is memorable, not to mention playing hide and seek
-              with cops (literally, it&apos;s illegal to be there). For every
-              one of us, navigating life with COVID-19 is, for sure, far more
-              depressing and exhausting. But we will leap through this, we will
-              reach to the top, we will be able to enjoy the view, we will get
-              there.
+              Hiking on Haiku Stairs is a wild experience. With the presence of
+              COVID-19, I&apos;m stuck at home. It makes me miss more about
+              travelling. Hopefully, when this is all over, I could pick up my
+              backpack and go to somewhere to explore again.
             </p>
             <p className="my-px20">
               There are still a couple of weeks before starting my full time job
-              after graduation. With stay at home policy, I&apos;m stuck at
-              home. But I will try to not waste a ton of it. A couple of things
-              I&apos;m working on: exercising every day, reviewing OS and
-              Network materials to pick up C again.
+              after graduation. With the extended shelter in place order,
+              I&apos;m stuck at home. But I will try to not waste a ton time. A
+              couple of things I&apos;m working on: exercising every day,
+              reviewing OS and Network materials to pick up C again.
             </p>
             <div className="w-4/5 my-px30 mx-auto border-b border-lightGray" />
             <p className="italic leading-1p6em">

@@ -92,7 +92,6 @@ module.exports = {
         "4p5r": "4.5rem",
         "5p75r": "5.75rem",
       },
-      margin: {},
       maxWidth: {
         px300: "300px",
         px550: "550px",

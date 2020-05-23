@@ -8,6 +8,7 @@ module.exports = {
     title: `Tong Yin`,
     description: `personal website tongyin`,
     author: `@tongyin002`,
+    siteUrl: `https://master.d1lr2zsvdkc5fx.amplifyapp.com/`,
   },
   plugins: [
     `gatsby-plugin-eslint`,
@@ -19,7 +20,7 @@ module.exports = {
         short_name: `tyin`,
         start_url: `/`,
         background_color: fullConfig.theme.colors.white,
-        theme_color: fullConfig.theme.colors.teal["400"],
+        theme_color: fullConfig.theme.colors.black,
         display: `minimal-ui`,
         icon: `src/contents/metaInfo/icon.png`,
       },
@@ -60,6 +61,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {

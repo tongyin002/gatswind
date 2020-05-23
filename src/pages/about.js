@@ -55,8 +55,8 @@ export default function AboutPage({ data }) {
             >
               FRAGMENTS
             </Link>
-            , I share about things I learned and interesting thoughts about
-            everything.
+            , I share about things I learned and random thoughts about
+            every other thing.
           </p>
           <p className="my-px20">
             My favorite movie and TV series are Hayao Miyazaki&apos;s{" "}
@@ -71,9 +71,7 @@ export default function AboutPage({ data }) {
           <p className="my-px20">
             This site is a static set of HTML, JS, CSS, and image files built
             using Gatsby.js, Tailwindcss, stored on AWS amplify. I don&apos;t
-            plan to use any CI as amplify can automate deployment from the repo
-            plus it doesn&apos;t need any tests to pass considering it is a
-            static site.
+            plan to use any CI as amplify automates deployment.
           </p>
           <h2 className="mt-px30 -mb-px10 text-1p5r tracking-npx1 font-helvetica text-black">
             Design
