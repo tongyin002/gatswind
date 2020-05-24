@@ -1,7 +1,7 @@
 {
   "name": "tyin-site",
   "description": "personal website",
-  "version": "4.0.0",
+  "version": "1.0.0",
   "author": "Tong Yin",
   "dependencies": {
     "@mdx-js/mdx": "^1.6.4",

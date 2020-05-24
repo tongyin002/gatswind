@@ -38,6 +38,48 @@ const createToc = (items, depth) => {
   }
 };
 
+const createFnDef = (node, i) => {
+  if (node && node.props && node.props.children) {
+    const children = node.props.children;
+
+    if (node.props.mdxType == "ol") {
+      return (
+        <ol className="list-decimal">
+          {children.length > 1
+            ? children.map((child, index) => {
+                return createFnDef(child, index);
+              })
+            : createFnDef(children, 1)}
+        </ol>
+      );
+    } else if (node.props.mdxType == "li") {
+      return (
+        <li
+          key={i}
+          id={node.props.id}
+          className="text-p8r leading-1p6em my-px20 md:text-p85r"
+        >
+          {children.length > 1
+            ? children.map((child, index) => {
+                return createFnDef(child, index);
+              })
+            : createFnDef(children, 1)}
+        </li>
+      );
+    } else if (node.props.mdxType == "inlineCode") {
+      return (
+        <code key={i} className="bg-codeBg text-p65r py-px2 px-px4 font-monoca">
+          {children}
+        </code>
+      );
+    } else {
+      return node;
+    }
+  } else {
+    return node;
+  }
+};
+
 /* eslint-disable react/display-name */
 const components = {
   p: (props) => (
@@ -96,28 +138,7 @@ const components = {
         return (
           <div key={index} className="footnotes my-px30 mx-auto w-9/10">
             {child.props.children[0]}
-            <ol className="list-decimal">
-              {child.props.children[1].props.children.length > 1 ? (
-                child.props.children[1].props.children.map((item, index) => {
-                  return (
-                    <li
-                      key={index}
-                      id={`fn-${index + 1}`}
-                      className="text-p8r leading-1p6em my-px20 md:text-p85r"
-                    >
-                      {item.props.children}
-                    </li>
-                  );
-                })
-              ) : (
-                <li
-                  className="text-p8r leading-1p6em my-px20 md:text-p85r"
-                  id={`fn-1`}
-                >
-                  {child.props.children[1].props.children.props.children}
-                </li>
-              )}
-            </ol>
+            {createFnDef(child.props.children[1])}
           </div>
         );
       }
