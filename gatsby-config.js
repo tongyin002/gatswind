@@ -47,14 +47,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-autolink-headers`,
-            options: {
-              icon: false,
-              elements: [`h2`, `h3`, `h4`],
-            },
-          },
+        remarkPlugins: [
+          require("remark-slug"),
+          require("remark-autolink-headings"),
+          require("remark-inline-links"),
         ],
       },
     },

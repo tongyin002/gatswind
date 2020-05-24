@@ -16,7 +16,6 @@
     "gatsby-plugin-robots-txt": "^1.5.0",
     "gatsby-plugin-sharp": "^2.6.8",
     "gatsby-plugin-sitemap": "^2.4.3",
-    "gatsby-remark-autolink-headers": "^2.3.3",
     "gatsby-source-filesystem": "^2.3.7",
     "gatsby-transformer-sharp": "^2.5.3",
     "prism-react-renderer": "^1.1.1",
@@ -24,6 +23,9 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
+    "remark-autolink-headings": "^6.0.0",
+    "remark-inline-links": "^4.0.0",
+    "remark-slug": "^6.0.0",
     "typeface-cardo": "0.0.72"
   },
   "keywords": [

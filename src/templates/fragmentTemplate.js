@@ -82,6 +82,7 @@ const components = {
                   return (
                     <li
                       key={index}
+                      id={`fn-${index + 1}`}
                       className="text-p8r leading-1p6em my-px20 md:text-p85r"
                     >
                       {item.props.children}
@@ -89,7 +90,10 @@ const components = {
                   );
                 })
               ) : (
-                <li className="text-p8r leading-1p6em my-px20 md:text-p85r">
+                <li
+                  className="text-p8r leading-1p6em my-px20 md:text-p85r"
+                  id={`fn-1`}
+                >
                   {child.props.children[1].props.children.props.children}
                 </li>
               )}
