@@ -18,7 +18,7 @@ const createFnDef = (node, i) => {
 
     if (node.props.mdxType == "ol") {
       return (
-        <ol className="list-decimal">
+        <ol key={i} className="list-none">
           {children.length > 1
             ? children.map((child, index) => {
                 return createFnDef(child, index);
@@ -33,6 +33,14 @@ const createFnDef = (node, i) => {
           id={node.props.id}
           className="text-p8r leading-1p6em my-px20 md:text-p85r"
         >
+          <sup
+            key={node.props.id}
+            className="cursor-pointer text-p85r border-b border-black hover:border-white"
+          >
+            <a href={`#fnref-${node.props.id.slice(3)}`}>
+              {node.props.id.slice(3)}
+            </a>
+          </sup>{" "}
           {children.length > 1
             ? children.map((child, index) => {
                 return createFnDef(child, index);
@@ -46,6 +54,8 @@ const createFnDef = (node, i) => {
           {children}
         </code>
       );
+    } else if (node.props.mdxType == "a" && node.props.href.startsWith("#fn")) {
+      return;
     } else {
       return node;
     }
@@ -53,7 +63,6 @@ const createFnDef = (node, i) => {
     return node;
   }
 };
-
 /* eslint-disable react/display-name */
 const components = {
   p: (props) => (
@@ -117,8 +126,9 @@ const components = {
         // the key doesn't matter, but react will yell without a key.
         return (
           <div key={index} className="footnotes my-px30 mx-auto w-9/10">
-            {child.props.children[0]}
-            {createFnDef(child.props.children[1])}
+            {child.props.children.length > 1
+              ? child.props.children.map((child, i) => createFnDef(child, i))
+              : createFnDef(child.props.children, 1)}
           </div>
         );
       }

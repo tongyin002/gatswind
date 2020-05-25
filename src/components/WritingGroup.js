@@ -18,7 +18,9 @@ export default function WritingGroup({ writings }) {
           return (
             <li key={title} className="mb-px25">
               <h2 className="my-px10 leading-1p5em font-helvetica font-bold">
-                <Link to={pathTo} title={title}>{title}</Link>
+                <Link to={pathTo} title={title}>
+                  {title}
+                </Link>
               </h2>
               <p className="text-p85r leading-1p7em hyphens-auto">
                 {hook}
@@ -32,13 +34,12 @@ export default function WritingGroup({ writings }) {
       </ul>
       <p className="my-px10 hyphens-auto text-p8r text-lightWhite italic">
         <em>
-          Older {groupTitle} available{" "}
           <Link
-            to={groupTitle == 'fragments' ? '/fragments': '/dev-posts'}
-            title={groupTitle == 'fragments' ? 'fragments' : 'dev-posts'}
+            to={groupTitle == "fragments" ? "/fragments" : "/dev-posts"}
+            title={groupTitle == "fragments" ? "fragments" : "dev-posts"}
             className="text-white border-b hover:border-black"
           >
-            here
+            Older {groupTitle} available here
           </Link>
         </em>
       </p>
