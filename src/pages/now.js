@@ -28,10 +28,9 @@ export default function NowPage({ data }) {
             </p>
             <p className="my-px20">
               There are still a couple of weeks before starting my full time job
-              after graduation. With the extended shelter in place order,
-              I&apos;m stuck at home. But I will try to not waste a ton time. A
-              couple of things I&apos;m working on: exercising every day,
-              reviewing OS and Network materials to pick up C again.
+              after graduation. I will try to not waste a ton time when staying
+              at home. A couple of things I&apos;m working on: exercising every
+              day, reviewing OS and Network materials to pick up C again.
             </p>
             <div className="w-4/5 my-px30 mx-auto border-b border-lightGray" />
             <p className="italic leading-1p6em">

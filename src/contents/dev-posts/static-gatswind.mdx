@@ -1,0 +1,193 @@
+---
+title: "Building Custom Static Site With Gatsby and Tailwind"
+published_at: 2020-05-25T14:15:00Z
+hook: "Utilizing MDX and Tailwindcss together with Gatsby's plugin system to build a performant static site."
+location: "Santa Clara"
+images:
+  - ./images/static-gatswind/lighthouse_score.png
+hook_image: ./images/static-gatswind/hook.jpg
+tags: ["gatsby", "tailwind", "mdx"]
+PR: https://github.com/tongyin002/gatswind/blob/master/src/contents/dev-posts/static-gatswind.mdx
+---
+
+Even with many static site generation tools available, I am stuck on choosing between Libraries based on React or Vue. I would like to try Hugo but I would also like to
+build something without spending too much energy learning a new language. What lured me over to Gatsby is its plugins feature. The idea of letting developers to invest in tooling sounds exciting.
+But before sharing my development process with Gatsby, I would like to share my decision on using Tailwindcss.
+
+## Abandon Separation of Concerns with Tailwindcss
+
+Writing css is not a enjoyable process, at least for me. Having a highly customized design requires a developer extremely familiar with the tools. Without any experiences with less, sass, stylus etc.,
+I would be buried in several nasty css files. All of these tools claim to make writing css enjoyable and reusable in some ways but I am tired of having to choose. I would still have to write large chunk of css
+and jumping back and forth from jsx and css, not to mention that every css class also needs justification on why it exists.
+
+Tailwindcss takes this tedious part away. Developers define a design system. With the generated utility classes, you just use it. You end up writing minimum amount of css with every utility classes utilized in
+high frequency and meaning way. [^1] [A justification article](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) by Adam Wathan explains why utility classes first approach exists. That won me over.
+
+## Building the Structure with Given Design
+
+### Configuring Design Unit Metrics of Styling Properties
+
+Besides the obvious parameters such as colors, spacing, font etc., websites use different unit metric system. Specifically, this site
+uses `px` on spacing, `em` on line height. Figuring out the unit metrics on commonly used parameters is the first thing I did. Integration of Tailwindcss with Gatsby is not perfect. Adding incremental change to tailwind config file
+requires manually restarting the server. Thus, listing out a range of possible values I need for each common parameters, I could quickly start using the generated classes without fighting with the system by constantly
+adding missing utility classes on the go.
+
+### Identifying Layouts and Sharable Components.
+
+Except the home page and photo page, the rest of the pages share a layout. It's tempting to include as many components as possible
+in a layout, decisions should be carefully made. One trick is to build a page first and extract the layout when building a second page.
+I built the about page first. The layout is obvious when I tried to build the now page. I naively started extracting layout component without
+consulting the fragment and post page where a middle section for figure caption is missing. It is always better to consult all possible pages before
+starting to extract components.
+
+Some of the components such as the navigation component change their presentation drastically on different screen size, in which case many people might tempt build
+different versions of the component. But keeping a single source of truth, especially for components that contain input resources, is equally important.
+On this site, from small to medium screen size, the navigation component moves from bottom to top on home page and photo page. But it changes from horizontal
+to vertical layout on the other pages. Other styling properties such as the hover state react differently based on the background as well. I decided to keep one component and
+add two props to change its layout:
+
+```jsx
+function Nav({ sideBarOnMd, bgLight }) {
+  return (
+    <nav
+      className="inline-block font-helvetica text-p65r font-bold 
+                  uppercase md:text-p7r"
+    >
+      <ul>
+        {Menus.map((menuItem) => {
+          return (
+            <li
+              key={menuItem.value}
+              className={`mx-px5 float-left ${
+                sideBarOnMd ? "md:float-none" : ""
+              }`}
+            >
+              <Link
+                to={menuItem.link}
+                title={menuItem.title}
+                className={`border-b-2 ${
+                  bgLight
+                    ? "border-white hover:border-black"
+                    : "border-black hover:border-white"
+                }`}
+              >
+                {menuItem.value}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
+```
+
+With `sideBarOnMd` and `bgLight`, the nav component transforms itself accordingly. Keeping a single source of truth, in this case, will
+make upgrade and maintenances easier when more sections are added in the future.
+
+## Building and Querying Data source
+
+Markdown is a natural choice when it comes to writing. Gatsby also has a strong support on querying data from `.md` files through a series plugins
+built on [_remark_](https://remark.js.org/). I initially built my data sources based on the markdown with the remark plugin but quickly ran into issues
+when it comes to styling. **It is extremely difficult to style a markdown converted elements**. Applying custom classes on elements could be done on
+using [plugin like this](https://github.com/chrisg86/gatsby-remark-classes), but it only gets parts of the job done. It also requires developers
+writing code in config file, which is a terrible practice.
+
+### Styling With MDX
+
+Gatsby also support a new file type [MDX](https://mdxjs.com/). MDX is a superset of markdown, which allows embedding react components in a traditional markdown file.
+This makes the data source extremely flexible. Styling a markdown converted element usually requires walking recursively along the syntax tree. Within MDX, pre-styled
+component can be used freely. Gatsby also has a dedicated plugin for mdx, which is built on top of _remark_. It bundles with commonly used functionalities from some
+remark plugins such as generating a table of contents.
+
+### Using GraphQL to Harvest Content from MDX
+
+Data source in Gatsby is built on GraphQl, which makes querying content fast and easy. Combining with MDX, developers can do custom styling in a systematic and fast way.
+When styling a image link from markdown `![img_alt](img_link)`, I had to either walk down the converted syntax tree to find the image element or applying styling on all elements
+with a `img` tag through a css file. Not only they require too much work for a simple task, they failed to solve the problem of custom styling on a specific element.
+With MDX, I could provide all images' path on _frontmatter_ first:
+
+```md
+---
+images:
+  - ./images/static-gatswind/lighthouse_score.png
+---
+```
+
+After querying the images' path when building a page component we could build the pre-styled image components and pass them back to MDX so that
+they can be directly referenced in MDX:
+
+```jsx
+export default function DevPostTemplate({ data: { mdx } }) {
+  const { title, images, PR, videos } = mdx.frontmatter;
+
+  const imgs = {};
+  if (images) {
+    images.forEach((image, index) => {
+      const { childImageSharp, publicURL, name } = image;
+      const className = "my-px40 lg:relative lg:w-px650";
+      const classNameCaption =
+        "pt-px12 text-center text-p85r italic leading-1p5em lg:absolute lg:w-px100 lg:text-right lg:left-npx120 lg:top-0";
+      // eslint-disable-next-line react/display-name, react/prop-types
+      imgs[`Img${index + 1}`] = ({ caption }) =>
+        childImageSharp ? (
+          <ImageSharp
+            fluid={childImageSharp.fluid}
+            alt={name}
+            caption={caption}
+            className={className}
+            classNameCaption={classNameCaption}
+          />
+        ) : (
+          <ImageSrc
+            src={publicURL}
+            alt={name}
+            caption={caption}
+            className={className}
+            classNameCaption={classNameCaption}
+          />
+        );
+    });
+  }
+  ......
+  <MDXRenderer imgs={imgs} vids={vids}>
+    {mdx.body}
+  </MDXRenderer>
+  ......
+```
+
+This way, I could also take care of the unsupported image format such as `.svg` and `.gif` with different self defined component
+such as `ImageSrc` in this case. By passing the pre-styled component back to MDX through `MDXRenderer` context, I could reference
+and use the component in MDX as following:
+
+```mdx
+<props.imgs.Img1 caption="Lighthouse score on home page 
+                          with minor styling tweaks." />
+```
+
+In this way, the styling barrier is removed. We could also embed extra pre-styled content in alongside an image however we want, such as adding a caption
+in my case. Applying styles on tag elements are also easier with MDX. With [`MDXProvider`](https://www.gatsbyjs.org/packages/gatsby-plugin-mdx/#mdxprovider), 
+elements with common tags can also be replaced with customized components.
+
+Using MDX does not take way our ability to walk down the syntax tree if we want. The plugin provides a [wrapper component](https://mdxjs.com/guides/wrapper-customization), 
+through which I styled the footnote definition on this site.
+
+## Performance, a11y and SEO
+
+<props.imgs.Img1 caption="Lighthouse score on home page with minor styling tweaks." />
+
+The result is just as good as it is claimed. With some minor styling tweaks, a full _400_ score on lighthouse can be easily achieved. [^2]
+
+## Takeaway
+
+Tailwindcss delivered all promises it claims. With tailwind, applying style is a joy. With _purgecss_, the bundle size for styling is extremely small.
+Considering the generated css are at atomic level and used in high frequency within many components, the result is not a surprise. With _gzip_ or _brotli_, 
+the delivered bundle size over the network could be even smaller.
+
+Using Gatsby is mixed feeling. It does seem to help developers building performant websites, but the user friendliness still needs improvements. Using GraphQL 
+is also a good experience. It integrates well with the system. Building and querying data feels easy and intuitive. However, many works around
+pulling and organizing data source still need workarounds. It is also easy to fall in the trap of plugin hell where developers apply plugins on top of existing
+plugins. Sometimes, learning and configuring plugin is just not as fun or efficient as writing code to solve the problem on you own.
+
+[^1]: Pre-processors are still available to use with Tailwind, but it is not necessary.
+[^2]: The score is based on tweaking some of the existing styling. Some arbitrary styling choices are reverted on production based on the design such as code block background and menu button size. I do not want to make design sacrifices for the sake of a perfect score.

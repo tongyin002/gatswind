@@ -11,7 +11,7 @@ const creatYearList = (groups) => {
     <div className="w-px100 mt-px5 text-right font-helvetica text-p65r leading-1p5em">
       <ul>
         {groups.map((group, index) => (
-          <li key={index} className="-mt-px5">
+          <li key={index} className="-mt-px4">
             <a
               href={`#${group.fieldValue}`}
               className="border-b border-white hover:border-black"
@@ -25,7 +25,7 @@ const creatYearList = (groups) => {
   );
 };
 export default function PostsPage({ data }) {
-  const groups = data.allMdx.group;
+  const groups = data.allMdx.group.slice(0).reverse();
 
   return (
     <LayoutWhite yearList={creatYearList(groups)}>

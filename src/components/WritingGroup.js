@@ -34,12 +34,13 @@ export default function WritingGroup({ writings }) {
       </ul>
       <p className="my-px10 hyphens-auto text-p8r text-lightWhite italic">
         <em>
+          Older {groupTitle} available{" "}
           <Link
             to={groupTitle == "fragments" ? "/fragments" : "/dev-posts"}
             title={groupTitle == "fragments" ? "fragments" : "dev-posts"}
             className="text-white border-b hover:border-black"
           >
-            Older {groupTitle} available here
+            here
           </Link>
         </em>
       </p>
