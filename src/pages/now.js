@@ -22,20 +22,20 @@ export default function NowPage({ data }) {
             </div>
             <p className="my-px20">
               Hiking on Haiku Stairs is a wild experience. With the presence of
-              COVID-19, I&apos;m stuck at home. It makes me miss more about
+              COVID-19, I&apos;m stuck at home. It makes me miss even more about
               travelling. Hopefully, when this is all over, I could pick up my
-              backpack and go to somewhere to explore again.
+              backpack and go somewhere to explore again.
             </p>
             <p className="my-px20">
               There are still a couple of weeks before starting my full time job
-              after graduation. I will try to not waste a ton time when staying
+              after graduation. I will try to not waste a ton of time when staying
               at home. A couple of things I&apos;m working on: exercising every
               day, reviewing OS and Network materials to pick up C again.
             </p>
             <div className="w-4/5 my-px30 mx-auto border-b border-lightGray" />
             <p className="italic leading-1p6em">
               This page was last updated on{" "}
-              <strong className="font-helvetica font-bold">May 18, 2020</strong>{" "}
+              <strong className="font-helvetica font-bold">May 26, 2020</strong>{" "}
               from{" "}
               <strong className="font-helvetica font-bold">
                 Santa Clara, California

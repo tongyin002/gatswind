@@ -42,7 +42,7 @@ export default function IndexPage({ data }) {
           </p>
           <p className="my-px10 hyphens-auto">
             I most often share about web dev processes, web APIs, thoughts on
-            readings and product design and many other things.
+            readings, product design and many other things.
           </p>
           <div id="writings" className="mx-3/50 md:mx-0">
             {groups.map((group, index) => {
@@ -91,8 +91,13 @@ export const query = graphql`
     allFile(filter: { relativeDirectory: { eq: "photos" } }) {
       nodes {
         childImageSharp {
-          fluid(webpQuality: 100, quality: 100, fit: COVER) {
-            ...GatsbyImageSharpFluid_withWebp
+          fluid(
+            webpQuality: 100
+            quality: 100
+            jpegQuality: 100
+            pngQuality: 100
+          ) {
+            src
           }
         }
       }

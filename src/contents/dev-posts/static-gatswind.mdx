@@ -1,5 +1,5 @@
 ---
-title: "Building Custom Static Site With Gatsby and Tailwind"
+title: "Building A Custom Static Site With Gatsby and Tailwind"
 published_at: 2020-05-25T14:15:00Z
 hook: "Utilizing MDX and Tailwindcss together with Gatsby's plugin system to build a performant static site."
 location: "Santa Clara"
@@ -10,39 +10,39 @@ tags: ["gatsby", "tailwind", "mdx"]
 PR: https://github.com/tongyin002/gatswind/blob/master/src/contents/dev-posts/static-gatswind.mdx
 ---
 
-Even with many static site generation tools available, I am stuck on choosing between Libraries based on React or Vue. I would like to try Hugo but I would also like to
-build something without spending too much energy learning a new language. What lured me over to Gatsby is its plugins feature. The idea of letting developers to invest in tooling sounds exciting.
+Even with many static site generation tools available, I am still stuck on choosing between Libraries based on React or Vue. I heard great things about Hugo but I eager to
+start building something without spending too much energy on learning a new language. What lured me over to Gatsby is its plugins feature. The idea of letting developers to invest in tooling sounds exciting.
 But before sharing my development process with Gatsby, I would like to share my decision on using Tailwindcss.
 
 ## Abandon Separation of Concerns with Tailwindcss
 
 Writing css is not a enjoyable process, at least for me. Having a highly customized design requires a developer extremely familiar with the tools. Without any experiences with less, sass, stylus etc.,
-I would be buried in several nasty css files. All of these tools claim to make writing css enjoyable and reusable in some ways but I am tired of having to choose. I would still have to write large chunk of css
+I would be struggling a lot while learning these tools. All of these tools claim to make writing css enjoyable and making css reusable in some ways but I am tired of having to choose. I would still have to write large chunk of css
 and jumping back and forth from jsx and css, not to mention that every css class also needs justification on why it exists.
 
 Tailwindcss takes this tedious part away. Developers define a design system. With the generated utility classes, you just use it. You end up writing minimum amount of css with every utility classes utilized in
-high frequency and meaning way. [^1] [A justification article](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) by Adam Wathan explains why utility classes first approach exists. That won me over.
+high frequency and a meaningful way. [^1] [A justification article](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) by Adam Wathan explains why utility classes first approach exists. That won me over.
 
 ## Building the Structure with Given Design
 
 ### Configuring Design Unit Metrics of Styling Properties
 
-Besides the obvious parameters such as colors, spacing, font etc., websites use different unit metric system. Specifically, this site
+Besides the obvious parameters such as colors, spacing, font etc., websites use different unit metric systems. Specifically, this site
 uses `px` on spacing, `em` on line height. Figuring out the unit metrics on commonly used parameters is the first thing I did. Integration of Tailwindcss with Gatsby is not perfect. Adding incremental change to tailwind config file
-requires manually restarting the server. Thus, listing out a range of possible values I need for each common parameters, I could quickly start using the generated classes without fighting with the system by constantly
+requires manually restarting the server. Thus, by listing out a range of possible values I need for each common parameters, I could quickly start using the generated classes without fighting with the system by constantly
 adding missing utility classes on the go.
 
 ### Identifying Layouts and Sharable Components.
 
-Except the home page and photo page, the rest of the pages share a layout. It's tempting to include as many components as possible
-in a layout, decisions should be carefully made. One trick is to build a page first and extract the layout when building a second page.
-I built the about page first. The layout is obvious when I tried to build the now page. I naively started extracting layout component without
-consulting the fragment and post page where a middle section for figure caption is missing. It is always better to consult all possible pages before
+Except the home page and photo page, the rest of the pages share a layout. It is tempting to include as many components as possible
+in a layout. Decisions should be carefully made. One trick is to build a page first and extract the layout when building a second page.
+I built the _about_ page first. The layout is obvious when I tried to build the _now_ page. I naively started extracting layout component without
+consulting the _fragment_ and _post_ page where a middle section for figure caption was missing. One Lesson learned: It is always better to consult all possible pages before
 starting to extract components.
 
-Some of the components such as the navigation component change their presentation drastically on different screen size, in which case many people might tempt build
-different versions of the component. But keeping a single source of truth, especially for components that contain input resources, is equally important.
-On this site, from small to medium screen size, the navigation component moves from bottom to top on home page and photo page. But it changes from horizontal
+Some of the components such as the navigation component change their presentation drastically on different screen sizes, in which case many people might tempt to build
+different versions of the component. But keeping a single source of truth, especially for components that contain input fields, is equally important.
+On this site, from small to medium screen size, the navigation component moves from the bottom to the top on _home_ page and _photo_ page. But it changes from horizontal
 to vertical layout on the other pages. Other styling properties such as the hover state react differently based on the background as well. I decided to keep one component and
 add two props to change its layout:
 
@@ -83,15 +83,15 @@ function Nav({ sideBarOnMd, bgLight }) {
 ```
 
 With `sideBarOnMd` and `bgLight`, the nav component transforms itself accordingly. Keeping a single source of truth, in this case, will
-make upgrade and maintenances easier when more sections are added in the future.
+make upgrade and maintenances easier when more menu items are added in the future.
 
 ## Building and Querying Data source
 
-Markdown is a natural choice when it comes to writing. Gatsby also has a strong support on querying data from `.md` files through a series plugins
+Markdown is a natural choice when it comes to writing. Gatsby has a strong support on querying data from `.md` files through a series plugins
 built on [_remark_](https://remark.js.org/). I initially built my data sources based on the markdown with the remark plugin but quickly ran into issues
-when it comes to styling. **It is extremely difficult to style a markdown converted elements**. Applying custom classes on elements could be done on
-using [plugin like this](https://github.com/chrisg86/gatsby-remark-classes), but it only gets parts of the job done. It also requires developers
-writing code in config file, which is a terrible practice.
+when it comes to styling. **It is extremely difficult to style a markdown converted element**. Applying custom classes on elements could be done
+using [plugin like this](https://github.com/chrisg86/gatsby-remark-classes), but it only gets parts of the job done. It also requires developers to
+write code in config file, which is a terrible practice.
 
 ### Styling With MDX
 
@@ -115,7 +115,7 @@ images:
 ```
 
 After querying the images' path when building a page component we could build the pre-styled image components and pass them back to MDX so that
-they can be directly referenced in MDX:
+they can be directly referenced in the writing:
 
 ```jsx
 export default function DevPostTemplate({ data: { mdx } }) {
@@ -156,18 +156,18 @@ export default function DevPostTemplate({ data: { mdx } }) {
   ......
 ```
 
-This way, I could also take care of the unsupported image format such as `.svg` and `.gif` with different self defined component
+This way, I could also take care of the unsupported image format such as `.svg` and `.gif` with different self-defined component
 such as `ImageSrc` in this case. By passing the pre-styled component back to MDX through `MDXRenderer` context, I could reference
-and use the component in MDX as following:
+and use the component in my writing as following:
 
 ```mdx
 <props.imgs.Img1 caption="Lighthouse score on home page 
                           with minor styling tweaks." />
 ```
 
-In this way, the styling barrier is removed. We could also embed extra pre-styled content in alongside an image however we want, such as adding a caption
-in my case. Applying styles on tag elements are also easier with MDX. With [`MDXProvider`](https://www.gatsbyjs.org/packages/gatsby-plugin-mdx/#mdxprovider), 
-elements with common tags can also be replaced with customized components.
+In this way, the styling barrier is removed. We could also embed extra pre-styled content alongside an image however we want, such as adding a caption. 
+Applying styles universally on elements with the same tag is also easier with MDX. With [`MDXProvider`](https://www.gatsbyjs.org/packages/gatsby-plugin-mdx/#mdxprovider), 
+elements with common tags can be replaced with customized components.
 
 Using MDX does not take way our ability to walk down the syntax tree if we want. The plugin provides a [wrapper component](https://mdxjs.com/guides/wrapper-customization), 
 through which I styled the footnote definition on this site.
@@ -176,7 +176,7 @@ through which I styled the footnote definition on this site.
 
 <props.imgs.Img1 caption="Lighthouse score on home page with minor styling tweaks." />
 
-The result is just as good as it is claimed. With some minor styling tweaks, a full _400_ score on lighthouse can be easily achieved. [^2]
+The result is just as good as it claims. With some minor styling tweaks, a full _400_ score on lighthouse can be easily achieved. [^2]
 
 ## Takeaway
 
@@ -184,10 +184,10 @@ Tailwindcss delivered all promises it claims. With tailwind, applying style is a
 Considering the generated css are at atomic level and used in high frequency within many components, the result is not a surprise. With _gzip_ or _brotli_, 
 the delivered bundle size over the network could be even smaller.
 
-Using Gatsby is mixed feeling. It does seem to help developers building performant websites, but the user friendliness still needs improvements. Using GraphQL 
+Using Gatsby is a mixed feeling. It does seem to help developers to build performant websites, but the user friendliness still needs improvements. Using GraphQL 
 is also a good experience. It integrates well with the system. Building and querying data feels easy and intuitive. However, many works around
-pulling and organizing data source still need workarounds. It is also easy to fall in the trap of plugin hell where developers apply plugins on top of existing
-plugins. Sometimes, learning and configuring plugin is just not as fun or efficient as writing code to solve the problem on you own.
+pulling and organizing data source still need workarounds. It is also easy to get lost among the endless list of plugins. Some transformer plugin even allow other plugins used on top of them. 
+It is easy to bloat the config file and fall in trap of the plugin hell. Sometimes, learning and configuring plugin is just not as fun or efficient as writing code to solve the problem on your own.
 
 [^1]: Pre-processors are still available to use with Tailwind, but it is not necessary.
 [^2]: The score is based on tweaking some of the existing styling. Some arbitrary styling choices are reverted on production based on the design such as code block background and menu button size. I do not want to make design sacrifices for the sake of a perfect score.

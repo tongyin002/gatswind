@@ -293,9 +293,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        videos {
-          publicURL
-        }
       }
     }
   }
