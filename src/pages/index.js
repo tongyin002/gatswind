@@ -97,7 +97,7 @@ export const query = graphql`
             jpegQuality: 100
             pngQuality: 100
           ) {
-            src
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }

@@ -19,23 +19,24 @@ export default function AboutPage({ data }) {
             <Img fluid={data.file.childImageSharp.fluid} alt="about"></Img>
           </div>
           <p className="my-px20">
-            I&apos;m a grad student living in Santa Clara, CA. Will hopefully be an engineer{" "}
+            I&apos;m a grad student living in Santa Clara, CA. Will hopefully be
+            an engineer{" "}
             <a
               href="https://quip.com/"
               className=" border-b border-black hover:border-white"
             >
               @Quip
-            </a>
+            </a>{" "}
             after I graduate in June. ( if I can get my EAD card on time : ) )
           </p>
           <p className="my-px20">
             I spent a year at Goldwind, a company specilizes designing and
             building windturbines. I worked on their infrastructure and upgraded
-            their CI/CD workflow. I also spent a few months at Blend, a fintech startup that
-            builds platform for streamlining lending process. I worked on their
-            public API v3. Having just started my developer career, I&apos;m
-            eager to learn everything especially building robust and pixel
-            detailed systems.
+            their CI/CD workflow. I also spent a few months at Blend, a fintech
+            startup that builds platform for streamlining lending process. I
+            worked on their public API v3. Having just started my developer
+            career, I&apos;m eager to learn everything especially building
+            robust and pixel detailed systems.
           </p>
           <p className="my-px20">
             I mainly document development and problem solving process in{" "}
@@ -61,16 +62,16 @@ export default function AboutPage({ data }) {
             My favorite movie and TV series are Hayao Miyazaki&apos;s{" "}
             <em>Spirited Away</em> and Philipp Kadelbach&apos;s{" "}
             <em>Generation War</em>. My favorite book is Keigo Higashino&apos;s{" "}
-            <em>トキオ</em>. I also like swimming, music, history, geopolitics and
-            NBA.
+            <em>トキオ</em>. I also like swimming, music, history, geopolitics
+            and NBA.
           </p>
           <h2 className="mt-px30 -mb-px10 text-1p5r tracking-npx1 font-helvetica text-black">
             Technology
           </h2>
           <p className="my-px20">
             This site is a static set of HTML, JS, CSS, and image files built
-            using Gatsby.js, Tailwindcss, stored and deployed on AWS amplify. I don&apos;t
-            plan to use any CI as amplify automates deployment.
+            using Gatsby.js, Tailwindcss, stored and deployed on AWS amplify. I
+            don&apos;t plan to use any CI as amplify automates deployment.
           </p>
           <h2 className="mt-px30 -mb-px10 text-1p5r tracking-npx1 font-helvetica text-black">
             Design
