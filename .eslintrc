@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["**/__tests__/*.js", "**/__mocks__/*.js"],
   // https://eslint.org/docs/user-guide/configuring#specifying-environments
   "env": {
     "browser": true,
@@ -12,8 +13,8 @@
   },
   "settings": {
     "react": {
-       "version": "detect"
-     }
+      "version": "detect"
+    }
   },
   "extends": [
     // https://eslint.org/docs/rules/
