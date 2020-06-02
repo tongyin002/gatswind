@@ -70,8 +70,9 @@ export default function AboutPage({ data }) {
           </h2>
           <p className="my-px20">
             This site is a static set of HTML, JS, CSS, and image files built
-            using Gatsby.js, Tailwindcss, stored and deployed on AWS amplify. I
-            don&apos;t plan to use any CI as amplify automates deployment.
+            using Gatsby.js, Tailwindcss, stored on AWS s3 and served through
+            Cloudfront with numerous edge locations around the globe. Deployment
+            is managed by Github Actions with a deployment script.
           </p>
           <h2 className="mt-px30 -mb-px10 text-1p5r tracking-npx1 font-helvetica text-black">
             Design
