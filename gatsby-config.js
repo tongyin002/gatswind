@@ -8,7 +8,7 @@ module.exports = {
     title: `Tong Yin`,
     description: `personal website tongyin`,
     author: `@tongyin002`,
-    siteUrl: `https://master.d1lr2zsvdkc5fx.amplifyapp.com/`,
+    siteUrl: `https://tongyin.org/`,
   },
   plugins: [
     `gatsby-plugin-eslint`,
@@ -61,8 +61,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://master.d1lr2zsvdkc5fx.amplifyapp.com/",
-        sitemap: "https://master.d1lr2zsvdkc5fx.amplifyapp.com/sitemap.xml",
+        host: "https://https://tongyin.org/",
+        sitemap: "https://https://tongyin.org/sitemap.xml",
         resolveEnv: () => process.env.GATSBY_ENV,
         env: {
           development: {
