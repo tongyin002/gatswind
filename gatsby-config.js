@@ -61,8 +61,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://https://tongyin.org/",
-        sitemap: "https://https://tongyin.org/sitemap.xml",
+        host: "https://tongyin.org/",
+        sitemap: "https://tongyin.org/sitemap.xml",
         resolveEnv: () => process.env.GATSBY_ENV,
         env: {
           development: {
