@@ -19,7 +19,7 @@ export default function AboutPage({ data }) {
             <Img fluid={data.file.childImageSharp.fluid} alt="about"></Img>
           </div>
           <p className="my-px20">
-            I&apos;m a grad student living in Santa Clara, CA. Will hopefully be
+            I&apos;m a grad student living in Santa Clara, CA. Will be
             an engineer{" "}
             <a
               href="https://quip.com/"
@@ -27,7 +27,7 @@ export default function AboutPage({ data }) {
             >
               @Quip
             </a>{" "}
-            after I graduate in June. ( if I can get my EAD card on time : ) )
+            after I graduate in June.
           </p>
           <p className="my-px20">
             I spent a year at Goldwind, a company specilizes designing and
