@@ -10,6 +10,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === "Mdx") {
     const value = createFilePath({ node, getNode });
     const type = value.slice(1, value.indexOf("/", 1));
+    const year = JSON.stringify(node.frontmatter.published_at).slice(1, 5);
 
     createNodeField({
       // Name of the field you are adding
@@ -31,7 +32,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: "year",
       node,
-      value: node.frontmatter.published_at.slice(0, 4),
+      value: year,
     });
   }
 };
